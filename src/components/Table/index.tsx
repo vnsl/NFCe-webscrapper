@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './index.scss';
 import { Table } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
@@ -48,7 +48,7 @@ const TableItems: React.FC<any> = ({itemsList}) => {
             sorter: {
                 compare: (a,b) => a.totalValue - b.totalValue,
                 multiple: 1
-            }
+            },
         },
     ]
 
@@ -59,8 +59,8 @@ const TableItems: React.FC<any> = ({itemsList}) => {
       };
 
     return (
-        <Table className='table-container' columns={columns} dataSource={data} onChange={onChange} pagination={false} scroll={{y: '70vh'}}/>
+        <Table className='table-container' columns={columns} dataSource={data} onChange={onChange} pagination={false} scroll={{y: '70vh'}} size='small'/>
     )
 }
 
-export default TableItems
+export default TableItems;
