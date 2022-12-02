@@ -51,7 +51,7 @@ const DownloadCSV: React.FC<any> = ({itemsList, fileFinalName, csv, json }) => {
 
 
     return (
-        <div>
+        <div className='buttonDownload'>
             {json && <Button onClick={exportToJson}>Download JSON</Button>}
             {csv && <Button onClick={exportToCsv}>Download CSV</Button>}
         </div>

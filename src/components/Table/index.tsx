@@ -54,12 +54,10 @@ const TableItems: React.FC<any> = ({itemsList}) => {
 
     const data: DataType[] = itemsList;
 
-    const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
-      };
+    
 
     return (
-        <Table className='table-container' columns={columns} dataSource={data} onChange={onChange} pagination={false} scroll={{y: '70vh'}} size='small'/>
+        <Table className='table-container' columns={columns} dataSource={data}  pagination={false} scroll={{y: '70vh'}} size='small'/>
     )
 }
 
