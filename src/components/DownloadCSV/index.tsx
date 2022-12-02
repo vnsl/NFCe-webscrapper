@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import './index.scss';
 
-const DownloadCSV: React.FC<any> = ({itemsList, fileFinalName, csv, json }) => {
+const DownloadCSV: React.FC<any> = ({fileContent, fileFinalName, csv, json }) => {
 
     const downloadFile = ({ data, fileName, fileType }: any) => {
         const blob = new Blob([data], { type: fileType })
@@ -22,7 +22,7 @@ const DownloadCSV: React.FC<any> = ({itemsList, fileFinalName, csv, json }) => {
       const exportToJson = (e: any) => {
         e.preventDefault()
         downloadFile({
-          data: JSON.stringify(itemsList),
+          data: JSON.stringify(fileContent),
           fileName: fileFinalName+'.json',
           fileType: 'text/json',
         })
@@ -32,19 +32,19 @@ const DownloadCSV: React.FC<any> = ({itemsList, fileFinalName, csv, json }) => {
         e.preventDefault()
       
         // Headers for each column
-        const headers = ['Item, Quantity, Total Value, Unitary Value']
+        const headers = ['Item\tQuantity\tTotal Value\tUnitary Value']
       
         // Convert users data to a csv
-        const usersCsv = itemsList.reduce((acc: any, user: any) => {
+        const usersCsv = fileContent.reduce((acc: any, user: any) => {
           const { item, quantity, totalValue, unitaryValue } = user
-          acc.push([item, quantity, totalValue, unitaryValue].join(','))
+          acc.push([item, quantity, totalValue, unitaryValue].join('\t'))
           return acc
         }, [])
       
         downloadFile({
           data: [...headers, ...usersCsv].join('\n'),
-          fileName: fileFinalName+'.csv',
-          fileType: 'text/csv',
+          fileName: fileFinalName+'.tab',
+          fileType: 'text/tab',
         })
       }
 
@@ -53,7 +53,7 @@ const DownloadCSV: React.FC<any> = ({itemsList, fileFinalName, csv, json }) => {
     return (
         <div className='buttonDownload'>
             {json && <Button onClick={exportToJson}>Download JSON</Button>}
-            {csv && <Button onClick={exportToCsv}>Download CSV</Button>}
+            {csv && <Button onClick={exportToCsv}>Download Tab</Button>}
         </div>
     )
 }

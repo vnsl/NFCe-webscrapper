@@ -9,22 +9,24 @@ interface Props{
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>>;
     handleSubmit: (text: string) => void;
+    searching: boolean;
 }
 
-const SearchInput: React.FC<Props> = ({search, setSearch, handleSubmit}) => {
-    const [searching, setSearching] = useState<boolean>(false)
+const SearchInput: React.FC<Props> = ({search, setSearch, handleSubmit, searching}) => {
+    
 
     const onSearch = () => {
-        setSearching(true);
-        handleSubmit(search);
-        setTimeout(() => {
-            setSearching(false);
-        }, 2000);
+      if(search === '') {
+        return
+      } else {
+          handleSubmit(search);
+      }
+       
     }
 
   return (
 
-    <Search className='search_input' placeholder='Search your NFCe here' allowClear enterButton="Search" onSearch={onSearch} size='large'  loading={searching} onChange={(e) => setSearch(e.target.value)} />
+    <Search className='search_input' placeholder='Search your NFCe here' allowClear={true} enterButton="Search" onSearch={onSearch} size='large'  loading={searching} onChange={(e) => setSearch(e.target.value)} />
     
   )
 }
