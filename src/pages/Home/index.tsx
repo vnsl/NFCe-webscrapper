@@ -19,7 +19,7 @@ const  Home: React.FC = () => {
         const send = {NFCeCode: text};
 
         try {
-            const response = await fetch('http://localhost:8000/', {
+            const response = await fetch('https://nfce-api.herokuapp.com/', {
                 method: 'POST',
                 body: JSON.stringify(send),
                 headers: {
