@@ -14,19 +14,16 @@ interface Props{
 
 const SearchInput: React.FC<Props> = ({search, setSearch, handleSubmit, searching}) => {
     
-
-    const onSearch = () => {
-      if(search === '') {
+    const onSearch = (value: string) => {
+      if(value === '') {
         return
       } else {
-          handleSubmit(search);
+        handleSubmit(value);
       }
-       
     }
 
   return (
-
-    <Search className='search_input' placeholder='Search your NFCe here' allowClear={true} enterButton="Search" onSearch={onSearch} size='large'  loading={searching} onChange={(e) => setSearch(e.target.value)} />
+    <Search className='search_input' placeholder='Search your NFCe here' allowClear enterButton="Search" onSearch={onSearch} size='large'  loading={searching} />
     
   )
 }

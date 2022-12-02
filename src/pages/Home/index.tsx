@@ -20,6 +20,7 @@ const  Home: React.FC = () => {
         const send = {NFCeCode: text};
 
         try {
+            setItemsList([])
             setSearching(true);
             const response = await fetch('https://nfce-api.herokuapp.com/', {
                 method: 'POST',
@@ -29,7 +30,6 @@ const  Home: React.FC = () => {
                 }
             })
             
-            console.log(response)
             if(!response.ok) {
                 const message = await response.json()
                 throw message.message
