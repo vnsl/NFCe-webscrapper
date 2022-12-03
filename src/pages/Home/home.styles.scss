@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .search-container {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    margin-top: 90px;
+  }
+
+  .search-container .search-input {
+    width: 60%;
+  }
+
+  h1 {
+    color: white;
+    
+  }
+
+  .ant-collapse {
+    width: 70%;
+    max-height: 80%;
+  }
+
+  .ant-collapse-header {
+    background-color: rgb(229, 226, 226);
+  }
+
+  .ant-collapse-content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    background-color: aliceblue;
+  }
+
+  .ant-descriptions {
+    width: 90%;
+  }
