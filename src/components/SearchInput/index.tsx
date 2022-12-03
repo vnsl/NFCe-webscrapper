@@ -24,7 +24,6 @@ const SearchInput: React.FC<Props> = ({search, setSearch, handleSubmit, searchin
 
   return (
     <Search className='search_input' placeholder='Search your NFCe here' allowClear enterButton="Search" onSearch={onSearch} size='large'  loading={searching} />
-    
   )
 }
 
