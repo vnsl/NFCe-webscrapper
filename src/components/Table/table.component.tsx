@@ -1,16 +1,11 @@
 import React from 'react'
-import './index.scss';
+// models
+import { DataType } from "../../models";
+// imports
 import { Table } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
-
-interface DataType {
-    key: React.Key;
-    item: string;
-    quantity: number;
-    totalValue: number;
-    unitaryValue: number;
-    type: string;
-}
+// styles and images
+import './table.styles.scss';
 
 const TableItems: React.FC<any> = ({itemsList}) => {
     const columns: ColumnsType<DataType> = [

@@ -1,10 +1,14 @@
 import React, { useMemo } from 'react';
-import './index.scss';
+// services
+// models
+import type { NotificationPlacement } from 'antd/es/notification/interface';
+// imports
 import {
   RadiusUprightOutlined,
 } from '@ant-design/icons';
 import { Button, notification } from 'antd';
-import type { NotificationPlacement } from 'antd/es/notification/interface';
+// styles and images
+import './notifications.styles.scss';
 
 const Context = React.createContext({ name: 'Default' });
 

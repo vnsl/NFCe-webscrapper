@@ -1,12 +1,14 @@
-import './index.scss';
-
-import SearchInput from '../../components/SearchInput';
 import React, { useState } from 'react';
-import TableItems from '../../components/Table';
-import DownloadCSV from '../../components/DownloadCSV';
+// components
+import SearchInput from '../../components/SearchInput/search-input.component';
+import TableItems from '../../components/Table/table.component';
+import DownloadFile from '../../components/DownloadFile/download-file.component';
+import SummaryTable from '../../components/SummaryTable/summary-table.component';
+import Notifications from '../../components/Notifications/notifications.component';
+// imports
 import { Collapse } from 'antd';
-import SummaryTable from '../../components/SummaryTable';
-import Notifications from '../../components/Notifications';
+// styles and images
+import './index.scss';
 
 const { Panel } = Collapse;
 
@@ -55,11 +57,11 @@ const  Home: React.FC = () => {
             {itemsList.length > 0 && 
                 <Collapse defaultActiveKey={1}>
                     <Panel header="Summary" key="1">
-                        <DownloadCSV fileContent={summary} fileFinalName={summary.storeName+summary.date} json={true} />
+                        <DownloadFile jsonContent={summary} fileFinalName={summary.storeName+summary.date}/>
                         <SummaryTable storeName={summary.storeName} date={summary.date} numberitems={summary.numberitems} totalValue={summary.totalValue} taxesPaid={summary.taxesPaid} code={summary.code}></SummaryTable>
                     </Panel>
                     <Panel header='Items List' key="2">
-                        <DownloadCSV fileContent={itemsList} fileFinalName={summary.storeName+summary.date} csv={true} />
+                        <DownloadFile tabContent={itemsList} fileFinalName={summary.storeName+summary.date} />
                         <TableItems itemsList={itemsList} />
                     </Panel>
                 </Collapse>}

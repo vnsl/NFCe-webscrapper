@@ -1,6 +1,8 @@
 import React from "react";
-import './index.scss';
+// imports
 import { Descriptions } from 'antd';
+// styles and images
+import './summary-table.styles.scss';
 
 const SummaryTable: React.FC<any> = ({storeName, date, numberItems, totalValue, taxesPaid, code}) => {
     return (

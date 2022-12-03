@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
-import './index.scss';
-
+import React, { useState } from 'react';
+// imports
 import { Input } from 'antd';
+// models
+import { SearchInputProps } from '../../models';
+// styles and images
+import './search-input.styles.scss';
 
 const { Search } = Input;
 
-interface Props{
-    search: string;
-    setSearch: React.Dispatch<React.SetStateAction<string>>;
-    handleSubmit: (text: string) => void;
-    searching: boolean;
-}
-
-const SearchInput: React.FC<Props> = ({search, setSearch, handleSubmit, searching}) => {
+const SearchInput: React.FC<SearchInputProps> = ({search, setSearch, handleSubmit, searching}) => {
     
     const onSearch = (value: string) => {
       if(value === '') {
