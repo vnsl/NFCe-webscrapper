@@ -2,7 +2,15 @@ import React from 'react';
 import { Button } from 'antd';
 import './index.scss';
 
-const DownloadCSV: React.FC<any> = ({fileContent, fileFinalName, csv, json }) => {
+type DownloadCSVProps = {
+  jsonContent: {};
+  tabContent: any[];
+  fileFinalName: string; 
+  tab?: boolean;
+  json?: boolean; 
+}
+
+const DownloadCSV: React.FC<DownloadCSVProps> = ({jsonContent, tabContent, fileFinalName, tab, json } ) => {
 
     const downloadFile = ({ data, fileName, fileType }: any) => {
         const blob = new Blob([data], { type: fileType })
@@ -22,20 +30,20 @@ const DownloadCSV: React.FC<any> = ({fileContent, fileFinalName, csv, json }) =>
       const exportToJson = (e: any) => {
         e.preventDefault()
         downloadFile({
-          data: JSON.stringify(fileContent),
+          data: JSON.stringify(jsonContent),
           fileName: fileFinalName+'.json',
           fileType: 'text/json',
         })
       }
 
-      const exportToCsv = (e: any) => {
+      const exportToTab = (e: any) => {
         e.preventDefault()
       
         // Headers for each column
         const headers = ['Item\tQuantity\tTotal Value\tUnitary Value']
       
         // Convert users data to a csv
-        const usersCsv = fileContent.reduce((acc: any, user: any) => {
+        const usersCsv: any[] = tabContent.reduce((acc: any, user: any) => {
           const { item, quantity, totalValue, unitaryValue } = user
           acc.push([item, quantity, totalValue, unitaryValue].join('\t'))
           return acc
@@ -53,7 +61,7 @@ const DownloadCSV: React.FC<any> = ({fileContent, fileFinalName, csv, json }) =>
     return (
         <div className='buttonDownload'>
             {json && <Button onClick={exportToJson}>Download JSON</Button>}
-            {csv && <Button onClick={exportToCsv}>Download Tab</Button>}
+            {tab && <Button onClick={exportToTab}>Download Tab</Button>}
         </div>
     )
 }
