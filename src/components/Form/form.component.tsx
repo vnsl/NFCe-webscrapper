@@ -4,7 +4,6 @@ import { Form, Input, Button } from 'antd';
 // styles and images
 import './form.styles.scss';
 import { FormProps } from "../../models/form.model";
-import { fileURLToPath } from "url";
 
 const FormComponent: React.FC<FormProps> = ({formContent, handleSubmit}) => {
     const onFinish = (values: any) => {
@@ -17,7 +16,7 @@ const FormComponent: React.FC<FormProps> = ({formContent, handleSubmit}) => {
 
 
     return (
-        <Form  labelCol={{ span: 8 }}
+        <Form  labelCol={{ span: 8 }} name={formContent.name} 
         wrapperCol={{ span: 16 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
             <Form.List
             name={formContent.name}   

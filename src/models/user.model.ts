@@ -3,6 +3,7 @@ export interface UserProps {
     createdDate: number;
     updatedDate: number;
     country: string;
+    email: string;
     nfceData?: NFCeProps[]
 }
 
