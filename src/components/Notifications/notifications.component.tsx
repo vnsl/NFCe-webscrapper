@@ -34,8 +34,6 @@ const Notifications: React.FC = () => {
           topRight
         </Button>
      
-
-     
     </Context.Provider>
   );
 };

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import FormComponent from "../../components/Form/form.component";
 import Header from "../../components/Header/header.component";
 import Tab from "../../components/Tabs/tab.component";
-import Upload from "../../components/Upload/upload.component";
+import UploadComponent from "../../components/Upload/upload.component";
 import { TabProps } from "../../models";
+import { UploadContentProps } from "../../models/upload.model";
 import { UserProps } from "../../models/user.model";
 import DownloadService from "../../services/download.service";
 
@@ -53,6 +54,12 @@ const Dashboard: React.FC = () => {
         ]
     }
 
+    const uploadDB: UploadContentProps = {
+        name: 'uploadDB',
+        multiple: false,
+        acceptType: 'application/json'
+    }
+
     const tabContent: TabProps[] = [
         {
             name: 'Create your DataBase', 
@@ -60,7 +67,7 @@ const Dashboard: React.FC = () => {
         },
         {
             name: 'Upload your DataBase', 
-            content: <Upload/>
+            content: <UploadComponent name={uploadDB.name} multiple={uploadDB.multiple} acceptType={uploadDB.acceptType} />
         }
     ]
 
