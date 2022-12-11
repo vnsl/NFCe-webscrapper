@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import DashboardContent from "../../components/DashboardContent/dashboardContent.component";
 import FormComponent from "../../components/Form/form.component";
 import Header from "../../components/Header/header.component";
 import Tab from "../../components/Tabs/tab.component";
 import UploadComponent from "../../components/Upload/upload.component";
+import { AuthContext } from "../../context/Auth/AuthProvider";
 import { TabProps } from "../../models";
 import { UploadContentProps } from "../../models/upload.model";
 import { UserProps } from "../../models/user.model";
@@ -12,11 +14,10 @@ import DownloadService from "../../services/download.service";
 import './dashboard.styles.scss';
 
 const Dashboard: React.FC = () => {
-    const [login, setLogin] = useState<boolean>(false);
-    const [user, setUser] = useState<UserProps>()
+
+    const { signIn, user } = useContext(AuthContext);
 
     const createDB = (value: any) => {
-        
         const newUser: UserProps = {
             userName: value.user.userName,
             country: value.user.country,
@@ -26,9 +27,12 @@ const Dashboard: React.FC = () => {
         }
 
         DownloadService.exportToJson(newUser, newUser.userName)
-        setUser(newUser);
-        setLogin(true);
-    }
+        signIn(newUser);
+    };
+
+    const login = (user: UserProps) => {
+        signIn(user);
+    };
 
     const formCreateDB = {
         name: 'user',
@@ -57,7 +61,9 @@ const Dashboard: React.FC = () => {
     const uploadDB: UploadContentProps = {
         name: 'uploadDB',
         multiple: false,
-        acceptType: 'application/json'
+        acceptType: 'application/json',
+        submitButton: 'Login',
+        onSubmit: login
     }
 
     const tabContent: TabProps[] = [
@@ -67,7 +73,7 @@ const Dashboard: React.FC = () => {
         },
         {
             name: 'Upload your DataBase', 
-            content: <UploadComponent name={uploadDB.name} multiple={uploadDB.multiple} acceptType={uploadDB.acceptType} />
+            content: <UploadComponent name={uploadDB.name} multiple={uploadDB.multiple} acceptType={uploadDB.acceptType} submitButton={uploadDB.submitButton} onSubmit={uploadDB.onSubmit}/>
         }
     ]
 
@@ -75,8 +81,8 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-main">
             <Header></Header>
             <div className="dashboard-content">
-                {!login && <Tab tabs={tabContent}></Tab>}
-                {login && <h1>{user?.userName}</h1>}
+                {user.userName === 'Guest' && <Tab tabs={tabContent}></Tab>}
+                {user.userName !== 'Guest' && <DashboardContent></DashboardContent>}
             </div>
         </div>
     )

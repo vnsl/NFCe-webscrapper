@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { message, } from 'antd';
+import { Button } from 'antd';
 
 // styles and images
 import './upload.styles.scss';
 import { UploadContentProps } from "../../models/upload.model";
-import { accessSync } from "fs";
 
-const UploadComponent: React.FC<UploadContentProps> = ({name, multiple, acceptType}) => {
+const UploadComponent: React.FC<UploadContentProps> = ({name, multiple, acceptType, cancelButton, submitButton, onSubmit, onCancel}) => {
     const [data, setData] = useState<any>();
+    const [upload, setUpload] = useState<boolean>(false);
     const [errorData, setErrorData] = useState<string | null>();
 
     const readFileOnUpload = (uploadedFile: any) =>{
@@ -21,12 +21,12 @@ const UploadComponent: React.FC<UploadContentProps> = ({name, multiple, acceptTy
               const data = await JSON.parse(fileReader.result) 
               
               setData(data);
-              
+              setUpload(true);
               setErrorData(null)      
             }
             
             catch(e){
-                alert()
+                alert(errorData)
                 //setErrorData("**Not valid JSON file!**");
                 
            }
@@ -35,14 +35,30 @@ const UploadComponent: React.FC<UploadContentProps> = ({name, multiple, acceptTy
            fileReader.readAsText(uploadedFile);
      }
 
+     function handleSubmit(data: any): void {
+        return onSubmit(data);
+     }
+
+     function handleCancel() {
+
+     }
+
     return (
        <>
-        <h1>Upload Json file - Example</h1>
+        <h1>Upload Json file</h1>
 
         <input type="file"
         onChange={(e: any)=>readFileOnUpload(e.target.files[0])} />
         <br />
-        {"uploaded file content -- " + data?.userName}
+        {upload && <div>
+            <h1>Welcome back {data?.userName}</h1>
+            {cancelButton && <Button htmlType="submit" onClick={() => {handleCancel()}}>
+                {cancelButton}
+            </Button>}
+            <Button htmlType="submit" onClick={() => {handleSubmit(data)}}>
+                {submitButton}
+            </Button>
+        </div>}
        </>
     )
 }
