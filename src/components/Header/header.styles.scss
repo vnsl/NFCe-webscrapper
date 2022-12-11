@@ -55,6 +55,19 @@
 }
 
 .avatar {
-    justify-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.avatar a {
+    font-size: 12px;
+    text-decoration: none;
+    border: none;
+}
+
+.avatar a:hover {
+    border: none;
 }
 

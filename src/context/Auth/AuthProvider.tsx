@@ -1,10 +1,13 @@
 import React, { createContext, MouseEventHandler, ReactNode, useState } from 'react';
-import { UserProps } from '../../models/user.model';
+import { NFCeProps, UserProps } from '../../models/user.model';
+import DownloadService from '../../services/download.service';
 
 interface AuthProps {
     user: UserProps;
+    setUser: React.Dispatch<React.SetStateAction<UserProps>>;
     signIn: (user: UserProps) => any;
     signOut: () => void;
+    addNFCe: (NFCeProps: NFCeProps) => void;
 }
 
 export const AuthContext = createContext<AuthProps>(null!);
@@ -31,11 +34,19 @@ function AuthProvider ({children}: ProviderProps) {
     };
 
     const signOut = () => {
+        if(user.userName !== 'Guest') {
+            DownloadService.exportToJson(user, user.userName);
+        }
         setUser(guestUser);
     };
+
+    const addNFCe = (NFCeProps: NFCeProps) => {
+        user.nfceData.push(NFCeProps);
+        setUser(user);
+    }
     
     return (
-        <AuthContext.Provider value={{user, signIn, signOut}}>
+        <AuthContext.Provider value={{user, setUser, signIn, signOut, addNFCe}}>
             {children}
         </AuthContext.Provider>
     )

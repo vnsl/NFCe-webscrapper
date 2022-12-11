@@ -12,9 +12,6 @@ const AvatarComponent: React.FC<AvatarProps> = () => {
 
   return (
     <div>
-        <Avatar icon={<UserOutlined />} >
-            {user && user.userName}
-        </Avatar>
         <Avatar >
             {user && user.userName}
         </Avatar>

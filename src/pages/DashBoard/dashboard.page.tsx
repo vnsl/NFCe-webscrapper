@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
             email: value.user.email,
             createdDate: Date.now(),
             updatedDate: Date.now(),
+            nfceData: []
         }
 
         DownloadService.exportToJson(newUser, newUser.userName)

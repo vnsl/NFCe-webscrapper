@@ -4,7 +4,7 @@ export interface UserProps {
     updatedDate: number;
     country: string;
     email: string;
-    nfceData?: NFCeProps[]
+    nfceData: NFCeProps[] | any[]
 }
 
 export interface NFCeProps {
@@ -14,7 +14,8 @@ export interface NFCeProps {
     numberItems: number;
     totalValue: number;
     taxesPaid: number;
-    items: NFCeItem[]
+    items: NFCeItem[];
+    uploaded?: EpochTimeStamp;
 }
 
 interface NFCeItem {

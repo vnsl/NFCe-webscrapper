@@ -1,0 +1,28 @@
+.upload-container {
+    position: absolute;
+    right: 10px;
+    top: 90px;
+
+}
+
+.rounded-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popover-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    max-width: 300px;
+}
+
+.popover-content input {
+    max-width: 200px;
+}
